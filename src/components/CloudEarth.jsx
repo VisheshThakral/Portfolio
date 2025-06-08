@@ -1,5 +1,5 @@
 import Globe from "react-globe.gl";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "https://esm.sh/three";
 
 const CloudEarth = () => {
