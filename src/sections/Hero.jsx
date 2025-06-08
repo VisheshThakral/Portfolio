@@ -1,11 +1,11 @@
-import { Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import CanvasLoader from "../components/CanvasLoader.jsx";
-import MindPalace from "./MindPalace.jsx";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import Button from "../components/Button.jsx";
+const MindPalace = lazy(() => import("./MindPalace"));
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false);
