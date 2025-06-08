@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+const useGSAP = window.ReactGSAP?.useGSAP || (() => {});
 import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';

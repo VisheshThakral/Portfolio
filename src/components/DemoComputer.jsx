@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useGLTF, useVideoTexture } from '@react-three/drei';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+const useGSAP = window.ReactGSAP?.useGSAP || (() => {});
 
 const DemoComputer = (props) => {
   const group = useRef();
