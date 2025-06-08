@@ -5,9 +5,7 @@ import * as THREE from "three";
 
 const MindPalace = (props) => {
   const group = useRef();
-  const { nodes, materials } = useGLTF(
-    "/models/brain_hologram.glb"
-  );
+  const { nodes, materials } = useGLTF("/models/brain_hologram.glb");
 
   useFrame(() => {
     if (group.current) {
@@ -43,43 +41,31 @@ const MindPalace = (props) => {
                 >
                   <mesh
                     name="Icosphere001_Particle_2_0"
-                    castShadow
-                    receiveShadow
                     geometry={nodes.Icosphere001_Particle_2_0.geometry}
                     material={materials.Particle_2}
                   />
                   <mesh
                     name="Icosphere001_Particle_2_0_1"
-                    castShadow
-                    receiveShadow
                     geometry={nodes.Icosphere001_Particle_2_0_1.geometry}
                     material={materials.Particle_2}
                   />
                   <mesh
                     name="Icosphere001_Particle_2_0_2"
-                    castShadow
-                    receiveShadow
                     geometry={nodes.Icosphere001_Particle_2_0_2.geometry}
                     material={materials.Particle_2}
                   />
                   <mesh
                     name="Icosphere001_Particle_1_0"
-                    castShadow
-                    receiveShadow
                     geometry={nodes.Icosphere001_Particle_1_0.geometry}
                     material={materials.Particle_1}
                   />
                   <mesh
                     name="Icosphere001_Particle_1_0_1"
-                    castShadow
-                    receiveShadow
                     geometry={nodes.Icosphere001_Particle_1_0_1.geometry}
                     material={materials.Particle_1}
                   />
                   <mesh
                     name="Icosphere001_Particle_1_0_2"
-                    castShadow
-                    receiveShadow
                     geometry={nodes.Icosphere001_Particle_1_0_2.geometry}
                     material={materials.Particle_1}
                   />

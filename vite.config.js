@@ -11,7 +11,8 @@ export default defineConfig({
           '@gsap/react': 'ReactGSAP' // Provide global variable name
         }
       }
-    }
+    },
+    chunkSizeWarningLimit: 1000
   },
   optimizeDeps: {
     include: ['@gsap/react', 'gsap']

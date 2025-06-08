@@ -64,7 +64,7 @@ export const myProjects = [
     desc: "Sphinx is a full-stack social media platform enabling user registration, secure JWT-based authentication, and dynamic feed management. The platform facilitates rich interactions through tweet creation, retweeting, and liking features, mimicking core functionalities of Twitter while emphasizing scalable architecture and real-time engagement",
     subdesc:
       "Built with Angular (frontend), Node.js (backend), and Tailwind CSS (styling), the project features a modular design, RESTful APIs, and token-based auth. Demonstrates expertise in full-stack development, state management, and responsive UI design—showcasing ability to deliver end-to-end solutions.",
-    href: "https://www.youtube.com/watch?v=y5vE8y_f_OM",
+    href: "https://github.com/VisheshThakral/Sphinx",
     texture: "/textures/project/project2.mp4",
     logo: "/assets/project-logo2.png",
     logoStyle: {
