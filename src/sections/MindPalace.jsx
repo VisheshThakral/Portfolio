@@ -11,7 +11,7 @@ const MindPalace = (props) => {
 
   useFrame(() => {
     if (group.current) {
-      group.current.rotation.y += 0.005; // Adjust speed as needed
+      group.current.rotation.y += 0.005 * 0.5; // Adjust speed as needed
     }
   });
 
