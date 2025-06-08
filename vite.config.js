@@ -9,5 +9,14 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     }
+  },
+  // Add this to fix @gsap/react issue:
+  build: {
+    rollupOptions: {
+      external: ['@gsap/react'] // Explicitly tell Rollup about this package
+    }
+  },
+  optimizeDeps: {
+    include: ['@gsap/react', 'gsap'] // Ensure these are pre-bundled
   }
 })
