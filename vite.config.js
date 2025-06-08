@@ -10,13 +10,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     }
   },
-  // Add this to fix @gsap/react issue:
+  optimizeDeps: {
+    include: [
+      '@gsap/react',
+      'gsap',
+      'react-globe.gl' // Add this line
+    ],
+  },
   build: {
     rollupOptions: {
-      external: ['@gsap/react'] // Explicitly tell Rollup about this package
-    }
+      external: ['@gsap/react'], // Keep existing if needed
+    },
   },
-  optimizeDeps: {
-    include: ['@gsap/react', 'gsap'] // Ensure these are pre-bundled
-  }
 })
