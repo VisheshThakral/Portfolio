@@ -13,7 +13,7 @@ const CloudEarth = () => {
     globe.controls().autoRotateSpeed = 0.35;
 
     // Add clouds sphere
-    const CLOUDS_IMG_URL = "../../public/assets/clouds.png";
+    const CLOUDS_IMG_URL = "/assets/clouds.png";
     const CLOUDS_ALT = 0.004;
     const CLOUDS_ROTATION_SPEED = -0.006; // deg/frame
 
