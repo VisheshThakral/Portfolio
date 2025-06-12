@@ -1,9 +1,21 @@
 import { useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import Button from "../components/Button.jsx";
 import CloudEarth from "../components/CloudEarth.jsx";
+import TechLogo from "../components/TechLogo.jsx";
 
 const About = () => {
   const [hasEmailCopied, setHasEmailCopied] = useState(false);
+
+  const logos = [
+    { path: "/assets/javascript.png", pos: [0, 3, 0] },
+    { path: "/assets/react.png", pos: [-2, 1.5, 0] },
+    { path: "/assets/angular.png", pos: [2, 1.5, 0] },
+    { path: "/assets/vue.png", pos: [2, -0.5, 0] },
+    { path: "assets/node.png", pos: [-2, -0.5, 0] },
+    { path: "/assets/webpack.png", pos: [0, -2, 0] },
+  ];
 
   const handleCopy = (entity) => {
     const entityMap = {
@@ -34,29 +46,50 @@ const About = () => {
             />
 
             <div>
-              <p className="grid-headtext">Hi, I’m Vishesh Thakral</p>
+              <p className="grid-headtext">
+                I write code that works. Most of the time.
+              </p>
               <p className="grid-subtext">
-                With 3+ years of experience, I have honed my skills in both
-                frontend and backend dev, creating dynamic and responsive
-                websites.
+                With 3+ years in full-stack development, I’ve shipped apps,
+                squashed bugs, and occasionally impressed myself.
               </p>
             </div>
           </div>
         </div>
 
         <div className="col-span-1 xl:row-span-3">
-          <div className="grid-container">
-            <img
-              src="assets/tech-stack.png"
-              alt="grid-2"
-              className="w-full object-cover sm:h-[276px] h-fit"
-            />
+          <div className="grid-container" style={{ gap: "0px " }}>
+            <div className="flex-auto max-h-[300px]">
+              <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+                <ambientLight />
+                <pointLight position={[10, 10, 10]} />
+                {logos.map((logo, i) => (
+                  <TechLogo
+                    key={i}
+                    texturePath={logo.path}
+                    position={logo.pos}
+                    size={[1, 1]}
+                  />
+                ))}
+
+                <EffectComposer>
+                  <Bloom
+                    intensity={1}
+                    luminanceThreshold={0.2}
+                    luminanceSmoothing={0.9}
+                    height={300}
+                  />
+                </EffectComposer>
+              </Canvas>
+            </div>
 
             <div>
               <p className="grid-headtext">Tech Stack</p>
               <p className="grid-subtext">
-                I specialize in a variety of languages, frameworks, and tools
-                that allow me to build robust and scalable applications
+                My toolbox is packed with the usual suspects — React, Angular,
+                Vue, Node, TypeScript — and some power-ups like Webpack and
+                Tailwind. I like to keep things clean, fast, and a little bit
+                magical.
               </p>
             </div>
           </div>
@@ -64,20 +97,26 @@ const About = () => {
 
         <div className="col-span-1 xl:row-span-4">
           <div className="grid-container">
-            <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center cursor-grab">
+            <div className="rounded-3xl w-full sm:h-[350px] h-fit flex justify-center items-center cursor-grab">
               <CloudEarth />
             </div>
             <div>
               <p className="grid-headtext">
-                I’m very flexible with time zone communications & locations
+                Exploring the digital world one idea at a time.
               </p>
               <p className="grid-subtext">
-                I&apos;m based in Chandigarh, India and open to remote work
-                worldwide.
+                Focused on creating experiences that scale across the globe.
+              </p>
+              <p className="grid-subtext">
+                I build for users — not just browsers.
               </p>
               <a href="#contact">
-              <Button name="Contact Me" id='contact' isBeam containerClass="w-full mt-10" />
-
+                <Button
+                  name="Contact Me"
+                  id="contact"
+                  isBeam
+                  containerClass="w-full mt-10"
+                />
               </a>
             </div>
           </div>
@@ -92,11 +131,25 @@ const About = () => {
             />
 
             <div>
-              <p className="grid-headtext">My Passion for Coding</p>
+              <p className="grid-headtext">
+                The Art (and Algorithms) of Programming
+              </p>
               <p className="grid-subtext">
-                I love solving problems and building things through code.
-                Programming isn&apos;t just my profession—it&apos;s my passion.
-                I enjoy exploring new technologies, and enhancing my skills.
+                I'm a problem-solver at heart. My interest in
+                DSA goes beyond interviews —
+                <ul>
+                  <li>
+                    🏆 Top 10% in LeetCode Weekly Contest 439 (March 2025) —
+                    Ranked ~3k out of 30,000+ global participants.
+                  </li>
+                  <li>
+                    🎯 Top 8% in CodeChef July Lunchtime 2021 — Ranked 760 out
+                    of 9,000+ globally.
+                  </li>
+                  <li>
+                   🧠 I've tackled 555+ LeetCode problems, and counting
+                  </li>
+                </ul>
               </p>
             </div>
           </div>
