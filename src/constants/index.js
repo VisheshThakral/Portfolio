@@ -28,7 +28,7 @@ export const myProjects = [
     subdesc:
       "Built using React, Tailwind CSS, Firebase, and TMDB API, the app features a responsive UI, modular components, and dynamic content rendering — demonstrating strong frontend architecture and integration with external services.",
     href: "https://promoflix.netlify.app/",
-    texture: "/textures/project/project1.mp4",
+    texture: "/textures/project/netflix.mp4",
     logo: "/assets/project-logo1.png",
     logoStyle: {
       backgroundColor: "#2A1816",
@@ -65,7 +65,7 @@ export const myProjects = [
     subdesc:
       "Built with Angular (frontend), Node.js (backend), and Tailwind CSS (styling), the project features a modular design, RESTful APIs, and token-based auth. Demonstrates expertise in full-stack development, state management, and responsive UI design—showcasing ability to deliver end-to-end solutions.",
     href: "https://github.com/VisheshThakral/Sphinx",
-    texture: "/textures/project/project2.mp4",
+    texture: "/textures/project/netflix.mp4",
     logo: "/assets/project-logo2.png",
     logoStyle: {
       backgroundColor: "#13202F",
