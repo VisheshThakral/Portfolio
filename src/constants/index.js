@@ -164,7 +164,6 @@ export const workExperiences = [
       "Reduced page load times by 30% through advanced performance optimization techniques like code splitting and lazy loading.",
       "Enhanced user experiences by implementing responsive design across 10+ web pages and integrating Google Analytics 4 (GA4) for metrics tracking.",
       "Instrumented GA4 analytics to uncover a 22% checkout drop-off.",
-      "Designed UI improvements that recovered ₹180M in potential lost revenue.",
     ],
     icon: "/assets/unthinkable.jpeg",
     animation: "clapping",
