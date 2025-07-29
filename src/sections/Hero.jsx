@@ -49,14 +49,6 @@ const Hero = () => {
           </Suspense>
         </Canvas>
       </div>
-      <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
-        <a href="#about" className="w-fit">
-          <Button
-            name="About me"
-            containerClass="bg-white uppercase sm:w-fit w-full sm:min-w-[500px]"
-          />
-        </a>
-      </div>
     </section>
   );
 };
