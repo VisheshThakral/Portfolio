@@ -38,7 +38,7 @@ const CloudEarth = () => {
   return (
     <Globe
       ref={globeEl}
-      height={380}
+      height={350}
       width={380}
       animateIn={false}
       backgroundColor="rgba(0, 0, 0, 0)"
