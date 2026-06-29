@@ -1,38 +1,22 @@
-import { useState } from "react";
+import { lazy, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import Button from "../components/Button.jsx";
-import CloudEarth from "../components/CloudEarth.jsx";
 import TechLogo from "../components/TechLogo.jsx";
+import { useInView } from "../hooks/useInView.jsx";
+const CloudEarth = lazy(() => import("../components/CloudEarth.jsx"));
 
 const About = () => {
-  const [hasEmailCopied, setHasEmailCopied] = useState(false);
+  const [techRef, techInView] = useInView();
+  const [globeRef, globeInView] = useInView();
 
   const logos = [
-    { path: "/assets/javascript.png", pos: [0, 3, 0] },
-    { path: "/assets/react.png", pos: [-2, 1.5, 0] },
-    { path: "/assets/angular.png", pos: [2, 1.5, 0] },
-    { path: "/assets/vue.png", pos: [2, -0.5, 0] },
-    { path: "assets/node.png", pos: [-2, -0.5, 0] },
-    { path: "/assets/webpack.png", pos: [0, -2, 0] },
+    { path: "/assets/javascript.webp", pos: [0, 3, 0] },
+    { path: "/assets/react.webp", pos: [-2, 1.5, 0] },
+    { path: "/assets/angular.webp", pos: [2, 1.5, 0] },
+    { path: "/assets/vue.webp", pos: [2, -0.5, 0] },
+    { path: "assets/node.webp", pos: [-2, -0.5, 0] },
+    { path: "/assets/webpack.webp", pos: [0, -2, 0] },
   ];
-
-  const handleCopy = (entity) => {
-    const entityMap = {
-      email: {
-        value: "thakralvishesh@gmail.com",
-        setCopied: setHasEmailCopied,
-      },
-    };
-
-    const item = entityMap[entity];
-    if (!item) return;
-
-    navigator.clipboard.writeText(item.value);
-    item.setCopied(true);
-
-    setTimeout(() => item.setCopied(false), 2000);
-  };
 
   return (
     <section className="c-space my-20" id="about">
@@ -40,8 +24,10 @@ const About = () => {
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container">
             <img
-              src="assets/grid1.png"
+              src="assets/grid1.webp"
               alt="grid-1"
+              loading="lazy"
+              decoding="async"
               className="w-full sm:h-[276px] h-fit object-contain"
             />
 
@@ -59,28 +45,35 @@ const About = () => {
 
         <div className="col-span-1 xl:row-span-3">
           <div className="grid-container" style={{ gap: "0px " }}>
-            <div className="flex-auto max-h-[300px]">
-              <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-                <ambientLight />
-                <pointLight position={[10, 10, 10]} />
-                {logos.map((logo, i) => (
-                  <TechLogo
-                    key={i}
-                    texturePath={logo.path}
-                    position={logo.pos}
-                    size={[1, 1]}
-                  />
-                ))}
+            <div ref={techRef} className="flex-auto max-h-[300px] min-h-[260px]">
+              {techInView && (
+                <Canvas
+                  camera={{ position: [0, 0, 8], fov: 50 }}
+                  dpr={[1, 1.5]}
+                  gl={{ antialias: false }}
+                >
+                  <ambientLight />
+                  <pointLight position={[10, 10, 10]} />
+                  {logos.map((logo, i) => (
+                    <TechLogo
+                      key={i}
+                      texturePath={logo.path}
+                      position={logo.pos}
+                      size={[1, 1]}
+                    />
+                  ))}
 
-                <EffectComposer>
-                  <Bloom
-                    intensity={1}
-                    luminanceThreshold={0.2}
-                    luminanceSmoothing={0.9}
-                    height={300}
-                  />
-                </EffectComposer>
-              </Canvas>
+                  <EffectComposer>
+                    <Bloom
+                      intensity={1}
+                      luminanceThreshold={0.2}
+                      luminanceSmoothing={0.9}
+                      mipmapBlur
+                      height={300}
+                    />
+                  </EffectComposer>
+                </Canvas>
+              )}
             </div>
 
             <div>
@@ -97,8 +90,15 @@ const About = () => {
 
         <div className="col-span-1 xl:row-span-4">
           <div className="grid-container max-h-fit">
-            <div className="rounded-3xl w-full h-fit flex justify-center items-center cursor-grab">
-              <CloudEarth />
+            <div
+              ref={globeRef}
+              className="rounded-3xl w-full h-[350px] flex justify-center items-center cursor-grab"
+            >
+              {globeInView && (
+                <Suspense fallback={<span className="canvas-loader" />}>
+                  <CloudEarth />
+                </Suspense>
+              )}
             </div>
             <div>
               <p className="grid-headtext">
@@ -115,8 +115,10 @@ const About = () => {
         <div className="xl:col-span-2 xl:row-span-3">
           <div className="grid-container">
             <img
-              src="assets/grid3.png"
+              src="assets/grid3.webp"
               alt="grid-3"
+              loading="lazy"
+              decoding="async"
               className="w-full sm:h-[266px] h-fit object-contain"
             />
 
@@ -124,10 +126,12 @@ const About = () => {
               <p className="grid-headtext">
                 The Art (and Algorithms) of Programming
               </p>
-              <p className="grid-subtext">
-                I'm a problem-solver at heart. My interest in
-                DSA goes beyond interviews —
-                <ul>
+              <div className="grid-subtext">
+                <p>
+                  I'm a problem-solver at heart. My interest in DSA goes beyond
+                  interviews —
+                </p>
+                <ul className="list-disc pl-5 mt-2 space-y-1">
                   <li>
                     🏆 Top 10% in LeetCode Weekly Contest 439 (March 2025) —
                     Ranked ~3k out of 30,000+ global participants.
@@ -140,7 +144,7 @@ const About = () => {
                    🧠 I've tackled 555+ LeetCode problems, and counting
                   </li>
                 </ul>
-              </p>
+              </div>
             </div>
           </div>
         </div>

@@ -1,10 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import CanvasLoader from "../components/CanvasLoader.jsx";
-import Button from "../components/Button.jsx";
 const MindPalace = lazy(() => import("./MindPalace"));
 
 const Hero = () => {
@@ -28,7 +26,11 @@ const Hero = () => {
         className="w-full h-full absolute inset-0 cursor-grab"
         id="mindpalace"
       >
-        <Canvas className="w-full h-full">
+        <Canvas
+          className="w-full h-full"
+          dpr={[1, 1.5]}
+          gl={{ powerPreference: "high-performance", antialias: false }}
+        >
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={2} />
           <Suspense fallback={<CanvasLoader />}>
@@ -36,16 +38,20 @@ const Hero = () => {
             <MindPalace isMobile />
             {/* Disable OrbitControls on mobile to allow scroll */}
             {!isMobile && (
-              <OrbitControls autoRotate={false} enableZoom={false} />
+              <OrbitControls
+                autoRotate={false}
+                enableZoom={false}
+                enablePan={false}
+              />
             )}
             <EffectComposer>
               <Bloom
                 luminanceThreshold={0.1}
                 luminanceSmoothing={0.5}
+                mipmapBlur
                 height={200}
               />
             </EffectComposer>
-            <Preload all />
           </Suspense>
         </Canvas>
       </div>

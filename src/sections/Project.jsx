@@ -1,11 +1,12 @@
 import gsap from 'gsap';
-const useGSAP = window.ReactGSAP?.useGSAP || (() => {});
+import { useGSAP } from '@gsap/react';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
 
 import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/CanvasLoader.jsx';
+import { useInView } from '../hooks/useInView.jsx';
 const DemoComputer = lazy(() => import("../components/DemoComputer.jsx"));
 
 const projectCount = myProjects.length;
@@ -39,6 +40,7 @@ const Projects = () => {
   }, [selectedProjectIndex]);
 
   const currentProject = myProjects[selectedProjectIndex];
+  const [canvasRef, canvasInView] = useInView();
 
   return (
     <section className="c-space my-20" id='work'>
@@ -76,36 +78,41 @@ const Projects = () => {
               target="_blank"
               rel="noreferrer">
               <p>Check Live Site</p>
-              <img src="/assets/arrow-up.png" alt="arrow" className="w-3 h-3" />
+              <img src="/assets/arrow-up.webp" alt="arrow" className="w-3 h-3" />
             </a>
           </div>
 
           <div className="flex justify-between items-center mt-7">
             <button className="arrow-btn" onClick={() => handleNavigation('previous')}>
-              <img src="/assets/left-arrow.png" alt="left arrow" />
+              <img src="/assets/left-arrow.webp" alt="left arrow" />
             </button>
 
             <button className="arrow-btn" onClick={() => handleNavigation('next')}>
-              <img src="/assets/right-arrow.png" alt="right arrow" className="w-4 h-4" />
+              <img src="/assets/right-arrow.webp" alt="right arrow" className="w-4 h-4" />
             </button>
           </div>
         </div>
 
         {
-          !isMobile && 
-          <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full cursor-grab">
-            <Canvas>
-              <ambientLight intensity={Math.PI} />
-              <directionalLight position={[10, 10, 5]} />
-              <Center>
-                <Suspense fallback={<CanvasLoader />}>
-                  <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
-                    <DemoComputer texture={currentProject.texture} />
-                  </group>
-                </Suspense>
-              </Center>
-              <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} />
-            </Canvas>
+          !isMobile &&
+          <div
+            ref={canvasRef}
+            className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full cursor-grab"
+          >
+            {canvasInView && (
+              <Canvas dpr={[1, 1.5]}>
+                <ambientLight intensity={Math.PI} />
+                <directionalLight position={[10, 10, 5]} />
+                <Center>
+                  <Suspense fallback={<CanvasLoader />}>
+                    <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
+                      <DemoComputer texture={currentProject.texture} />
+                    </group>
+                  </Suspense>
+                </Center>
+                <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} makeDefault />
+              </Canvas>
+            )}
           </div>
         }
       </div>

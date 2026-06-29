@@ -1,38 +1,57 @@
 import Globe from "react-globe.gl";
 import { useEffect, useRef } from "react";
-import * as THREE from "https://esm.sh/three";
+import * as THREE from "three";
+import { prefersReducedMotion } from "../hooks/useInView.jsx";
 
 const CloudEarth = () => {
   const globeEl = useRef();
 
   useEffect(() => {
     const globe = globeEl.current;
+    if (!globe) return;
 
-    // Auto-rotate
-    globe.controls().autoRotate = true;
+    const reduce = prefersReducedMotion();
+
+    // Auto-rotate (disabled when the user prefers reduced motion)
+    globe.controls().autoRotate = !reduce;
     globe.controls().autoRotateSpeed = 0.35;
 
     // Add clouds sphere
-    const CLOUDS_IMG_URL = "/assets/clouds.png";
+    const CLOUDS_IMG_URL = "/assets/clouds.webp";
     const CLOUDS_ALT = 0.004;
     const CLOUDS_ROTATION_SPEED = -0.006; // deg/frame
 
+    let frameId;
+    let clouds;
+
     new THREE.TextureLoader().load(CLOUDS_IMG_URL, (cloudsTexture) => {
-      const clouds = new THREE.Mesh(
+      clouds = new THREE.Mesh(
         new THREE.SphereGeometry(
           globe.getGlobeRadius() * (1 + CLOUDS_ALT),
-          75,
-          75
+          48,
+          48
         ),
         new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true })
       );
       globe.scene().add(clouds);
 
-      (function rotateClouds() {
-        clouds.rotation.y += (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
-        requestAnimationFrame(rotateClouds);
-      })();
+      if (!reduce) {
+        (function rotateClouds() {
+          clouds.rotation.y += (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
+          frameId = requestAnimationFrame(rotateClouds);
+        })();
+      }
     });
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      if (clouds) {
+        globe.scene().remove(clouds);
+        clouds.geometry.dispose();
+        clouds.material.map?.dispose();
+        clouds.material.dispose();
+      }
+    };
   }, []);
 
   return (
@@ -43,8 +62,8 @@ const CloudEarth = () => {
       animateIn={false}
       backgroundColor="rgba(0, 0, 0, 0)"
       backgroundImageOpacity={0.5}
-      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg"
-      bumpImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png"
+      globeImageUrl="/assets/earth-blue-marble.webp"
+      bumpImageUrl="/assets/earth-topology.webp"
     />
   );
 };

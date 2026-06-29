@@ -29,13 +29,13 @@ export const myProjects = [
       "Built using React, Tailwind CSS, Firebase, and TMDB API, the app features a responsive UI, modular components, and dynamic content rendering — demonstrating strong frontend architecture and integration with external services.",
     href: "https://promoflix.netlify.app/",
     texture: "/textures/project/netflix.mp4",
-    logo: "/assets/project-logo1.png",
+    logo: "/assets/project-logo1.webp",
     logoStyle: {
       backgroundColor: "#2A1816",
       border: "0.2px solid #36201D",
       boxShadow: "0px 0px 60px 0px #AA3C304D",
     },
-    spotlight: "/assets/spotlight1.png",
+    spotlight: "/assets/spotlight1.webp",
     tags: [
       {
         id: 1,
@@ -45,17 +45,17 @@ export const myProjects = [
       {
         id: 2,
         name: "Firebase",
-        path: "/assets/firebase.png",
+        path: "/assets/firebase.webp",
       },
       {
         id: 3,
         name: "TailwindCSS",
-        path: "assets/tailwindcss.png",
+        path: "assets/tailwindcss.webp",
       },
       {
         id: 4,
         name: "JavaScript",
-        path: "/assets/javascript.png",
+        path: "/assets/javascript.webp",
       },
     ],
   },
@@ -66,38 +66,38 @@ export const myProjects = [
       "Built with Angular (frontend), Node.js (backend), and Tailwind CSS (styling), the project features a modular design, RESTful APIs, and token-based auth. Demonstrates expertise in full-stack development, state management, and responsive UI design—showcasing ability to deliver end-to-end solutions.",
     href: "https://github.com/VisheshThakral/Sphinx",
     texture: "/textures/project/netflix.mp4",
-    logo: "/assets/project-logo2.png",
+    logo: "/assets/project-logo2.webp",
     logoStyle: {
       backgroundColor: "#13202F",
       border: "0.2px solid #17293E",
       boxShadow: "0px 0px 60px 0px #2F6DB54D",
     },
-    spotlight: "/assets/spotlight2.png",
+    spotlight: "/assets/spotlight2.webp",
     tags: [
       {
         id: 1,
         name: "Angular",
-        path: "/assets/angular.png",
+        path: "/assets/angular.webp",
       },
       {
         id: 2,
         name: "Node",
-        path: "assets/node.png",
+        path: "assets/node.webp",
       },
       {
         id: 3,
         name: "Mongo",
-        path: "assets/mongodb.png",
+        path: "assets/mongodb.webp",
       },
       {
         id: 4,
         name: "TypeScript",
-        path: "/assets/typescript.png",
+        path: "/assets/typescript.webp",
       },
       {
         id: 5,
         name: "TailwindCSS",
-        path: "assets/tailwindcss.png",
+        path: "assets/tailwindcss.webp",
       },
     ],
   },
@@ -150,7 +150,7 @@ export const workExperiences = [
       "Created a script to streamline cross-team UI version management, reducing manual branch-tag lookup time by 80% for 4 teams.",
       "Partnered with UX designers to revamp 5+ sign-up screens in React, implementing e2e tests",
     ],
-    icon: "/assets/priority.jpeg",
+    icon: "/assets/priority.webp",
     animation: "victory",
   },
   {
@@ -165,7 +165,7 @@ export const workExperiences = [
       "Enhanced user experiences by implementing responsive design across 10+ web pages and integrating Google Analytics 4 (GA4) for metrics tracking.",
       "Instrumented GA4 analytics to uncover a 22% checkout drop-off.",
     ],
-    icon: "/assets/unthinkable.jpeg",
+    icon: "/assets/unthinkable.webp",
     animation: "clapping",
   },
 ];

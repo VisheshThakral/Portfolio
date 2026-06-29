@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react';
 import { useGLTF, useVideoTexture } from '@react-three/drei';
 import gsap from 'gsap';
-const useGSAP = window.ReactGSAP?.useGSAP || (() => {});
+import { useGSAP } from '@gsap/react';
 
 const DemoComputer = (props) => {
   const group = useRef();
-  const { nodes, materials } = useGLTF('/models/computer.glb');
+  const { nodes, materials } = useGLTF('/models/computer.glb', '/draco/');
 
   const txt = useVideoTexture(props.texture ? props.texture : '/textures/project/netflix.mp4');
 
@@ -988,6 +988,6 @@ const DemoComputer = (props) => {
   );
 };
 
-useGLTF.preload('/models/computer.glb');
+useGLTF.preload('/models/computer.glb', '/draco/');
 
 export default DemoComputer;

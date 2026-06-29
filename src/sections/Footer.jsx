@@ -9,7 +9,7 @@ const Footer = () => {
     },
     {
       href: "https://www.linkedin.com/in/vishesh-thakral/",
-      src: "/assets/linkedin.png",
+      src: "/assets/linkedin.webp",
       alt: "LinkedIn",
     },
     {
